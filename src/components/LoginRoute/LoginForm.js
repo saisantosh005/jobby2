@@ -50,8 +50,12 @@ class LoginForm extends Component {
     const response = await fetch(url, options);
     if (response.ok) {
       const responseData = await response.json();
-      console.log(responseData);
-      Cookies.set("jwtToken", responseData.jwt_token, { expires: 30 });
+      const token = responseData.jwt_token;
+      Cookies.set("jwt_token", token, {
+        expires: 30,
+        path: "/"
+      });
+      console.log(Cookies.get("jwt_token"), "Login");
       history.replace("/about");
     } else {
       this.setState({

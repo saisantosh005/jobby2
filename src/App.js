@@ -1,8 +1,9 @@
 import "./styles.css";
 import LoginForm from "./components/LoginRoute/LoginForm";
-import Home from "./components/Home/Home";
+import Home from "./components/HomeRoute/Home";
+import ProtectedRoute from "./components/commonComponents/ProtectedRoute/ProtectedRoute";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const App = () => (
   <Router>
     <Switch>
