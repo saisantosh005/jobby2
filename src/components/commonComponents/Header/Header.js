@@ -23,7 +23,7 @@ const Header = (props) => {
       />
       <LinkAndButtonContainer>
         <LinkContainer>
-          <LinkElement to="/">Home</LinkElement>
+          <LinkElement to="/home">Home</LinkElement>
           <LinkElement to="/jobs">Jobs</LinkElement>
         </LinkContainer>
         <Button onClick={onLogout}>Logout</Button>

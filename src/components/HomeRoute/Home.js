@@ -12,7 +12,10 @@ class Home extends Component {
     super(props);
     this.state = {};
   }
-  onClickFind = () => {};
+  onClickFind = () => {
+    const { history } = this.props;
+    history.replace("/jobs");
+  };
 
   render() {
     return (

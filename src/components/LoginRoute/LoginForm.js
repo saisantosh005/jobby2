@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 import {
   MainContainer,
   Form,
@@ -51,12 +51,9 @@ class LoginForm extends Component {
     if (response.ok) {
       const responseData = await response.json();
       const token = responseData.jwt_token;
-      Cookies.set("jwt_token", token, {
-        expires: 30,
-        path: "/"
-      });
-      console.log(Cookies.get("jwt_token"), "Login");
-      history.replace("/about");
+      localStorage.setItem("jwt_token", token);
+      // console.log(Cookie.get("jwt_token"), "Login");
+      history.replace("/home");
     } else {
       this.setState({
         errorMessage: "true"
