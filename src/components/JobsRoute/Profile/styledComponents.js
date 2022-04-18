@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const ProfileContainer = styled.div`
   background-image: url("https://assets.ccbp.in/frontend/react-js/profile-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 20px;
   padding: 10px;
 `;
