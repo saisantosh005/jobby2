@@ -1,13 +1,21 @@
 import Component from "react";
 import { withRouter } from "react-router-dom";
 import Cookie from "js-cookie";
+
 import {
   HeaderContainer,
   Logo,
   LinkAndButtonContainer,
+  LinkAndButtonContainerTwo,
   LinkContainer,
   LinkElement,
-  Button
+  Button,
+  HomeIconContainer,
+  JobsIconContainer,
+  LogoutContainer,
+  HomeIcon,
+  JobsIcon,
+  Logout
 } from "./styledComponents";
 const Header = (props) => {
   const { history } = props;
@@ -28,6 +36,17 @@ const Header = (props) => {
         </LinkContainer>
         <Button onClick={onLogout}>Logout</Button>
       </LinkAndButtonContainer>
+      <LinkAndButtonContainerTwo>
+        <HomeIconContainer to="/home">
+          <HomeIcon />
+        </HomeIconContainer>
+        <JobsIconContainer to="/jobs">
+          <JobsIcon />
+        </JobsIconContainer>
+        <LogoutContainer>
+          <Logout onClick={onLogout} />
+        </LogoutContainer>
+      </LinkAndButtonContainerTwo>
     </HeaderContainer>
   );
 };

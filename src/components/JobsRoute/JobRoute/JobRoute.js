@@ -2,6 +2,7 @@ import { Component } from "react";
 import Header from "../../commonComponents/Header/Header";
 import Profile from "../Profile/Profile";
 import JobItem from "../JobItem/JobItem";
+
 import {
   JobRouteMainContainer,
   JobRouteDetailsContainer,

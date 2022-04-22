@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
+import { AiFillHome } from "react-icons/ai";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -14,10 +16,22 @@ const Logo = styled.img`
 `;
 
 const LinkAndButtonContainer = styled.div`
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-grow: 1;
+`;
+const LinkAndButtonContainerTwo = styled.div`
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
 `;
 const LinkContainer = styled.div`
   /* display: flex;
@@ -40,11 +54,37 @@ const Button = styled.button`
   border-radius: 3px;
   padding: 8px 20px;
 `;
+const HomeIconContainer = styled(Link)`
+  display: inline;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+  margin-right: 10px;
+`;
+const JobsIconContainer = styled(Link)`
+  display: inline;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+  margin-right: 10px;
+`;
+const LogoutContainer = styled.div``;
+const HomeIcon = styled(AiFillHome)``;
+const JobsIcon = styled(AiFillHome)``;
+const Logout = styled(FiLogOut)``;
+
 export {
   HeaderContainer,
   Logo,
   LinkAndButtonContainer,
+  LinkAndButtonContainerTwo,
   LinkContainer,
   LinkElement,
-  Button
+  Button,
+  HomeIconContainer,
+  JobsIconContainer,
+  LogoutContainer,
+  HomeIcon,
+  JobsIcon,
+  Logout
 };

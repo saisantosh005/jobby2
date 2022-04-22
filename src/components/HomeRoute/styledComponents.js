@@ -6,12 +6,15 @@ const HomeContainer = styled.div`
   min-height: 100vh;
 `;
 const HomeDetailsContainer = styled.div`
-  background-image: url("https://assets.ccbp.in/frontend/react-js/home-lg-bg.png");
+  background-image: url("https://assets.ccbp.in/frontend/react-js/home-sm-bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
   flex-grow: 1;
   padding: 20px;
+  @media screen and (min-width: 768px) {
+    background-image: url("https://assets.ccbp.in/frontend/react-js/home-lg-bg.png");
+  }
 `;
 const Heading = styled.h1`
   font-size: 20px;

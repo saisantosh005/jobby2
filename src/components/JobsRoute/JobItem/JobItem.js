@@ -12,7 +12,11 @@ import {
   SalaryText,
   DescriptionContainer,
   DescriptionHeading,
-  Description
+  Description,
+  StarIconContainer,
+  StarIcon,
+  LocationIcon,
+  IconAndTextContainer
 } from "./styledComponents";
 
 const JobItem = (props) => {
@@ -26,19 +30,27 @@ const JobItem = (props) => {
   const employementType = details.employementType;
   const packageValue = details.package;
   return (
-    <JobItemMainContainer>
+    <JobItemMainContainer to={`/jobs/${id}`}>
       <DetailsContainer>
         <ImageContainer>
           <Image src={url} alt="icon-logo" />
           <ImageDetails>
             <Heading>{title}</Heading>
-            <Rating>{rating}</Rating>
+            <StarIconContainer>
+              <StarIcon /> <Rating>{rating}</Rating>
+            </StarIconContainer>
           </ImageDetails>
         </ImageContainer>
         <FitlerPartContainer>
           <FilterTextContainer>
-            <FilterText>{location}</FilterText>
-            <FilterText>{employementType}</FilterText>
+            <IconAndTextContainer>
+              <LocationIcon />
+              <FilterText>{location}</FilterText>
+            </IconAndTextContainer>
+            <IconAndTextContainer>
+              <LocationIcon />
+              <FilterText>{employementType}</FilterText>
+            </IconAndTextContainer>
           </FilterTextContainer>
           <SalaryText>{packageValue}</SalaryText>
         </FitlerPartContainer>
