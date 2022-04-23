@@ -12,8 +12,14 @@ import {
   Input,
   Label,
   JobListContainer,
-  FilterAndJobListContainer
+  FilterAndJobListContainer,
+  Text,
+  NoJobDetails,
+  HeadingTwo,
+  SpecialImage,
+  ErrorContainer
 } from "./styledComponents";
+import { Button } from "../../commonComponents/Header/styledComponents";
 
 class JobRoute extends Component {
   constructor(props) {
@@ -22,7 +28,8 @@ class JobRoute extends Component {
       employementType: [],
       salaryRange: "",
       searchValue: "",
-      jobs: []
+      jobs: [],
+      error: false
     };
   }
   componentDidMount() {
@@ -51,7 +58,12 @@ class JobRoute extends Component {
         package: item.package_per_annum
       }));
       this.setState({
-        jobs: jobs
+        jobs: jobs,
+        error: false
+      });
+    } else {
+      this.setState({
+        error: true
       });
     }
   };
@@ -170,10 +182,33 @@ class JobRoute extends Component {
       </EmployementListContainer>
     );
   };
+  renderJobListContainer = () => {
+    const { jobs } = this.state;
 
+    return (
+      <JobListContainer>
+        {jobs.length > 0 ? (
+          jobs.map((item) => <JobItem details={item} />)
+        ) : (
+          <NoJobDetails>
+            <SpecialImage src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png " />
+            <HeadingTwo>No Jobs Found</HeadingTwo>
+            <Text>We're sorry, the page you requested could not be found.</Text>
+          </NoJobDetails>
+        )}
+      </JobListContainer>
+    );
+  };
+  renderError = () => (
+    <ErrorContainer>
+      <SpecialImage src="https://assets.ccbp.in/frontend/react-js/failure-img.png" />
+      <HeadingTwo>Oops! Some thing went wrong</HeadingTwo>
+      <Text>We cannot seem to find the page you are looking for.</Text>
+      <Button onClick={this.getJobs}>Retry</Button>
+    </ErrorContainer>
+  );
   render() {
-    const { employementType, jobs } = this.state;
-    console.log(jobs);
+    const { error } = this.state;
     return (
       <JobRouteMainContainer>
         <Header />
@@ -183,11 +218,7 @@ class JobRoute extends Component {
             {this.renderEmployementList()}
             {this.renderSalaryRange()}
           </JobRouteDetailsContainer>
-          <JobListContainer>
-            {jobs.map((item) => (
-              <JobItem details={item} />
-            ))}
-          </JobListContainer>
+          {error === false ? this.renderJobListContainer() : this.renderError()}
         </FilterAndJobListContainer>
       </JobRouteMainContainer>
     );

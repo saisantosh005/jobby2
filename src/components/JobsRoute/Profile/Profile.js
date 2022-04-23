@@ -1,6 +1,13 @@
 import { Component } from "react";
 import Cookies from "js-cookie";
-import { ProfileContainer, Image, Name, Bio } from "./styledComponents";
+import {
+  ProfileContainer,
+  Image,
+  Name,
+  Bio,
+  ButtonContainer,
+  Button
+} from "./styledComponents";
 
 class Profile extends Component {
   constructor(props) {
@@ -9,7 +16,7 @@ class Profile extends Component {
       name: "",
       imgUrl: "",
       bio: "",
-      errMsg: ""
+      error: false
     };
   }
   componentDidMount() {
@@ -35,19 +42,32 @@ class Profile extends Component {
       this.setState({
         name: data.profile_details.name,
         imgUrl: data.profile_details.profile_image_url,
-        bio: data.profile_details.short_bio
+        bio: data.profile_details.short_bio,
+        error: false
+      });
+    } else {
+      this.setState({
+        error: true
       });
     }
   };
 
   render() {
-    const { name, imgUrl, bio } = this.state;
+    const { name, imgUrl, bio, error } = this.state;
     return (
-      <ProfileContainer>
-        <Image src={imgUrl} alt="profile" />
-        <Name>{name}</Name>
-        <Bio>{bio}</Bio>
-      </ProfileContainer>
+      <>
+        {error === true ? (
+          <ButtonContainer>
+            <Button onClick={this.getDetails}>Retry</Button>
+          </ButtonContainer>
+        ) : (
+          <ProfileContainer>
+            <Image src={imgUrl} alt="profile" />
+            <Name>{name}</Name>
+            <Bio>{bio}</Bio>
+          </ProfileContainer>
+        )}
+      </>
     );
   }
 }

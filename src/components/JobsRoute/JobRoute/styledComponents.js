@@ -11,7 +11,6 @@ const JobRouteDetailsContainer = styled.div`
     width: 100%;
   }
   width: 40vw;
-  border: 2px solid red;
 `;
 const FilterAndJobListContainer = styled.div`
   @media screen and (max-width: 768px) {
@@ -21,7 +20,6 @@ const FilterAndJobListContainer = styled.div`
   }
   display: flex;
   align-self: center;
-  border: 2px solid red;
   margin: 20px;
 `;
 const EmployementListContainer = styled.div`
@@ -44,7 +42,30 @@ const JobListContainer = styled.div`
   width: 80%;
   padding: 20px;
   margin: 10px;
-  /* background: red; */
+`;
+const NoJobDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const SpecialImage = styled.img`
+  width: 90%;
+  padding: 20px;
+`;
+
+const HeadingTwo = styled.h1`
+  text-align: center;
+  color: #ffffff;
+`;
+const Text = styled.p`
+  color: #ffffff;
+  text-align: center;
+`;
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 export {
   JobRouteMainContainer,
@@ -55,5 +76,10 @@ export {
   Heading,
   Input,
   Label,
-  JobListContainer
+  JobListContainer,
+  SpecialImage,
+  Text,
+  HeadingTwo,
+  NoJobDetails,
+  ErrorContainer
 };
