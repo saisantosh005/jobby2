@@ -20,7 +20,8 @@ import {
 const Header = (props) => {
   const { history } = props;
   const onLogout = () => {
-    Cookie.remove("jwt_token");
+    localStorage.removeItem("jwt_token");
+    // Cookie.remove("jwt_token");
     history.replace("/");
   };
   return (

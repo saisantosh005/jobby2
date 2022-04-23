@@ -104,14 +104,21 @@ class JobDetailsRoute extends Component {
       });
     }
   };
-
+  goNextPage = (id) => {
+    this.getDetails();
+  };
   renderSimilarJobs = () => {
     const { similarJobs } = this.state;
-    console.log(similarJobs);
     return (
       <SimilarJobsContainer>
         {similarJobs.map((item) => (
-          <SimilarJobItem id={item.id} to={`/jobs/${item.id}`}>
+          <SimilarJobItem
+            id={item.id}
+            to={`/jobs/${item.id}`}
+            onClick={() => {
+              this.goNextPage(item.id);
+            }}
+          >
             <DetailsContainer>
               <ImageContainer>
                 <Image src={item.logoUrl} alt="icon-logo" />

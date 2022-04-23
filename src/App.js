@@ -10,10 +10,10 @@ const App = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={LoginForm} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/jobs" component={JobRoute} />
-      <Route exact path="/jobs/:id" component={JobDetailsRoute} />
-      <Route component={NotFound} />
+      <ProtectedRoute exact path="/home" component={Home} />
+      <ProtectedRoute exact path="/jobs" component={JobRoute} />
+      <ProtectedRoute exact path="/jobs/:id" component={JobDetailsRoute} />
+      <ProtectedRoute component={NotFound} />
     </Switch>
   </Router>
 );
