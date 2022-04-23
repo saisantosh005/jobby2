@@ -6,6 +6,7 @@ const ProfileContainer = styled.div`
   background-size: cover;
   border-radius: 20px;
   padding: 10px;
+  margin: 10px;
 `;
 const Image = styled.img`
   width: 60px;

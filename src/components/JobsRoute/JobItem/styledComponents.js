@@ -4,9 +4,11 @@ import { AiFillStar } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 
 const JobItemMainContainer = styled(Link)`
+  /* width: 100%; */
   text-decoration: none;
   padding: 10px;
   color: #ffffff;
+  background: #2c364c;
 `;
 const DetailsContainer = styled.div`
   border-bottom: 2px solid #64748b;

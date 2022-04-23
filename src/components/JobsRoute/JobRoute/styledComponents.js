@@ -7,14 +7,22 @@ const JobRouteMainContainer = styled.div`
   min-height: 100vh;
 `;
 const JobRouteDetailsContainer = styled.div`
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
   width: 40vw;
-  margin: 10px;
+  border: 2px solid red;
 `;
 const FilterAndJobListContainer = styled.div`
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
   display: flex;
   align-self: center;
   border: 2px solid red;
-  width: 80%;
+  margin: 20px;
 `;
 const EmployementListContainer = styled.div`
   color: #ffffff;
@@ -32,7 +40,12 @@ const Input = styled.input``;
 const Label = styled.label`
   margin-left: 5px;
 `;
-const JobListContainer = styled.div``;
+const JobListContainer = styled.div`
+  width: 80%;
+  padding: 20px;
+  margin: 10px;
+  /* background: red; */
+`;
 export {
   JobRouteMainContainer,
   JobRouteDetailsContainer,
