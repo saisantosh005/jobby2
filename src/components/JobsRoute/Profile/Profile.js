@@ -1,5 +1,9 @@
 import { Component } from "react";
 import Cookies from "js-cookie";
+
+// import Loader from 'react-loader-spinner'
+
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import {
   ProfileContainer,
   Image,
@@ -16,7 +20,8 @@ class Profile extends Component {
       name: "",
       imgUrl: "",
       bio: "",
-      error: false
+      error: false,
+      isLoading: true
     };
   }
   componentDidMount() {
@@ -43,24 +48,29 @@ class Profile extends Component {
         name: data.profile_details.name,
         imgUrl: data.profile_details.profile_image_url,
         bio: data.profile_details.short_bio,
-        error: false
+        error: false,
+        isLoading: false
       });
     } else {
       this.setState({
+        isLoading: false,
         error: true
       });
     }
   };
 
   render() {
-    const { name, imgUrl, bio, error } = this.state;
+    const { name, imgUrl, bio, error, isLoading } = this.state;
     return (
       <>
-        {error === true ? (
+        {isLoading === true ? (
+          <div>Loading...</div>
+        ) : error === true ? (
           <ButtonContainer>
             <Button onClick={this.getDetails}>Retry</Button>
           </ButtonContainer>
         ) : (
+          // <Loader type="TailSpin" color="#00BFFF" height={50} width={50} />
           <ProfileContainer>
             <Image src={imgUrl} alt="profile" />
             <Name>{name}</Name>

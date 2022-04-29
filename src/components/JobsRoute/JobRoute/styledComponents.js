@@ -67,6 +67,14 @@ const ErrorContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const Button = styled.button`
+  background-color: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 20px;
+`;
+
 export {
   JobRouteMainContainer,
   JobRouteDetailsContainer,
@@ -81,5 +89,6 @@ export {
   Text,
   HeadingTwo,
   NoJobDetails,
-  ErrorContainer
+  ErrorContainer,
+  Button
 };

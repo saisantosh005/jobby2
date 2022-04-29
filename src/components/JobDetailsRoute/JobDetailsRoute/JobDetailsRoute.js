@@ -1,7 +1,15 @@
 import { Component } from "react";
 import Header from "../../commonComponents/Header/Header";
+// import Loader from 'react-loader-spinner'
+
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import {
+  ErrorContainer,
+  SpecialImage,
+  HeadingTwo,
+  Text,
+  Button,
   JobDetailsMainContainer,
   JobItemMainContainer,
   DetailsContainer,
@@ -48,7 +56,9 @@ class JobDetailsRoute extends Component {
       skills: [],
       life: {},
       employmentType: "",
-      similarJobs: []
+      similarJobs: [],
+      isLoading: true,
+      error: false
     };
   }
 
@@ -75,6 +85,7 @@ class JobDetailsRoute extends Component {
       const details = data.job_details;
       const similarJobs = data.similar_jobs;
       this.setState({
+        isLoading: false,
         id: details.id,
         title: details.title,
         url: details.company_logo_url,
@@ -101,6 +112,10 @@ class JobDetailsRoute extends Component {
           jobDescription: item.job_description,
           rating: item.rating
         }))
+      });
+    } else {
+      this.setState({
+        error: true
       });
     }
   };
@@ -153,6 +168,14 @@ class JobDetailsRoute extends Component {
     );
   };
 
+  renderError = () => (
+    <ErrorContainer>
+      <SpecialImage src="https://assets.ccbp.in/frontend/react-js/failure-img.png" />
+      <HeadingTwo>Oops! Some thing went wrong</HeadingTwo>
+      <Text>We cannot seem to find the page you are looking for.</Text>
+      <Button onClick={this.getJobs}>Retry</Button>
+    </ErrorContainer>
+  );
   render() {
     const {
       similarJobs,
@@ -166,61 +189,69 @@ class JobDetailsRoute extends Component {
       description,
       skills,
       life,
-      employmentType
+      employmentType,
+      isLoading,
+      error
     } = this.state;
     return (
       <JobDetailsMainContainer>
         <Header />
-        <JobDetailsContainer>
-          <JobItemMainContainer>
-            <DetailsContainer>
-              <ImageContainer>
-                <Image src={url} alt="icon-logo" />
-                <ImageDetails>
-                  <Heading>{title}</Heading>
-                  <StarIconContainer>
-                    <StarIcon />
-                    <Rating>{rating}</Rating>
-                  </StarIconContainer>
-                </ImageDetails>
-              </ImageContainer>
-              <FitlerPartContainer>
-                <FilterTextContainer>
-                  <IconAndTextContainer>
-                    <LocationIcon />
-                    <FilterText>{location}</FilterText>
-                  </IconAndTextContainer>
-                  <IconAndTextContainer>
-                    <LocationIcon />
-                    <FilterText>{employmentType}</FilterText>
-                  </IconAndTextContainer>
-                </FilterTextContainer>
+        {isLoading ? (
+          <div>Loading</div>
+        ) : error ? (
+          this.renderError()
+        ) : (
+          <JobDetailsContainer>
+            <JobItemMainContainer>
+              <DetailsContainer>
+                <ImageContainer>
+                  <Image src={url} alt="icon-logo" />
+                  <ImageDetails>
+                    <Heading>{title}</Heading>
+                    <StarIconContainer>
+                      <StarIcon />
+                      <Rating>{rating}</Rating>
+                    </StarIconContainer>
+                  </ImageDetails>
+                </ImageContainer>
+                <FitlerPartContainer>
+                  <FilterTextContainer>
+                    <IconAndTextContainer>
+                      <LocationIcon />
+                      <FilterText>{location}</FilterText>
+                    </IconAndTextContainer>
+                    <IconAndTextContainer>
+                      <LocationIcon />
+                      <FilterText>{employmentType}</FilterText>
+                    </IconAndTextContainer>
+                  </FilterTextContainer>
 
-                <SalaryText>{packagePerAnnum}</SalaryText>
-              </FitlerPartContainer>
-            </DetailsContainer>
-            <DescriptionContainer>
-              <DescriptionHeading>Description</DescriptionHeading>
-              <Description>{description}</Description>
-            </DescriptionContainer>
-            <h4>Skills</h4>
-            <SkillsContainer>
-              {skills.map((item) => (
-                <SkillContainer>
-                  <SkillImage src={item.imgUrl} alt="logo" />
+                  <SalaryText>{packagePerAnnum}</SalaryText>
+                </FitlerPartContainer>
+              </DetailsContainer>
+              <DescriptionContainer>
+                <DescriptionHeading>Description</DescriptionHeading>
+                <Description>{description}</Description>
+              </DescriptionContainer>
+              <h4>Skills</h4>
+              <SkillsContainer>
+                {skills.map((item) => (
+                  <SkillContainer>
+                    <SkillImage src={item.imgUrl} alt="logo" />
 
-                  <SkillName>{item.name}</SkillName>
-                </SkillContainer>
-              ))}
-            </SkillsContainer>
-            <h4>Life at Companu</h4>
-            <LifeAtCompanyMainContainer>
-              <LifeDescription>{life.description}</LifeDescription>
-              <LifeImage src={life.url} />
-            </LifeAtCompanyMainContainer>
-          </JobItemMainContainer>
-          {this.renderSimilarJobs()}
-        </JobDetailsContainer>
+                    <SkillName>{item.name}</SkillName>
+                  </SkillContainer>
+                ))}
+              </SkillsContainer>
+              <h4>Life at Companu</h4>
+              <LifeAtCompanyMainContainer>
+                <LifeDescription>{life.description}</LifeDescription>
+                <LifeImage src={life.url} />
+              </LifeAtCompanyMainContainer>
+            </JobItemMainContainer>
+            {this.renderSimilarJobs()}
+          </JobDetailsContainer>
+        )}
       </JobDetailsMainContainer>
     );
   }

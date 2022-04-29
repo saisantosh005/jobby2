@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { AiFillHome } from "react-icons/ai";
+import { RiFolder5Fill } from "react-icons/ri";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -70,9 +71,9 @@ const JobsIconContainer = styled(Link)`
 `;
 const LogoutContainer = styled.div``;
 const HomeIcon = styled(AiFillHome)``;
-const JobsIcon = styled(AiFillHome)``;
+const JobsIcon = styled(RiFolder5Fill)``;
 const Logout = styled(FiLogOut)``;
-
+const HomeLink = styled(Link)``;
 export {
   HeaderContainer,
   Logo,
@@ -86,5 +87,6 @@ export {
   LogoutContainer,
   HomeIcon,
   JobsIcon,
-  Logout
+  Logout,
+  HomeLink
 };

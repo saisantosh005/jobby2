@@ -15,7 +15,8 @@ import {
   LogoutContainer,
   HomeIcon,
   JobsIcon,
-  Logout
+  Logout,
+  HomeLink
 } from "./styledComponents";
 const Header = (props) => {
   const { history } = props;
@@ -26,10 +27,12 @@ const Header = (props) => {
   };
   return (
     <HeaderContainer>
-      <Logo
-        src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
-        alt="logo"
-      />
+      <HomeLink to="/home">
+        <Logo
+          src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+          alt="logo"
+        />
+      </HomeLink>
       <LinkAndButtonContainer>
         <LinkContainer>
           <LinkElement to="/home">Home</LinkElement>

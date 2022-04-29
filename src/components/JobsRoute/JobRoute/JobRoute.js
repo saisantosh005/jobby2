@@ -2,6 +2,9 @@ import { Component } from "react";
 import Header from "../../commonComponents/Header/Header";
 import Profile from "../Profile/Profile";
 import JobItem from "../JobItem/JobItem";
+// import Loader from 'react-loader-spinner'
+
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import {
   JobRouteMainContainer,
@@ -17,9 +20,9 @@ import {
   NoJobDetails,
   HeadingTwo,
   SpecialImage,
-  ErrorContainer
+  ErrorContainer,
+  Button
 } from "./styledComponents";
-import { Button } from "../../commonComponents/Header/styledComponents";
 
 class JobRoute extends Component {
   constructor(props) {
@@ -29,13 +32,17 @@ class JobRoute extends Component {
       salaryRange: "",
       searchValue: "",
       jobs: [],
-      error: false
+      error: false,
+      isLoading: true
     };
   }
   componentDidMount() {
     this.getJobs();
   }
   getJobs = async () => {
+    this.setState({
+      isLoading: true
+    });
     const token = localStorage.getItem("jwt_token");
     const url = "https://apis.ccbp.in/jobs";
     const options = {
@@ -59,7 +66,8 @@ class JobRoute extends Component {
       }));
       this.setState({
         jobs: jobs,
-        error: false
+        error: false,
+        isLoading: false
       });
     } else {
       this.setState({
@@ -69,6 +77,9 @@ class JobRoute extends Component {
   };
 
   getFilterList = async () => {
+    this.setState({
+      isLoading: true
+    });
     const { employementType, salaryRange, searchValue } = this.state;
     const stringList = employementType.join(",");
     const url = `https://apis.ccbp.in/jobs?employment_type=${stringList}&minimum_package=${salaryRange}&search=${searchValue}`;
@@ -94,7 +105,13 @@ class JobRoute extends Component {
         package: item.package_per_annum
       }));
       this.setState({
-        jobs: jobs
+        jobs: jobs,
+        isLoading: false
+      });
+    } else {
+      this.setState({
+        error: true,
+        isLoading: false
       });
     }
   };
@@ -183,11 +200,13 @@ class JobRoute extends Component {
     );
   };
   renderJobListContainer = () => {
-    const { jobs } = this.state;
+    const { jobs, error } = this.state;
 
     return (
       <JobListContainer>
-        {jobs.length > 0 ? (
+        {error ? (
+          this.renderError()
+        ) : jobs.length > 0 ? (
           jobs.map((item) => <JobItem details={item} />)
         ) : (
           <NoJobDetails>
@@ -208,7 +227,7 @@ class JobRoute extends Component {
     </ErrorContainer>
   );
   render() {
-    const { error } = this.state;
+    const { isLoading } = this.state;
     return (
       <JobRouteMainContainer>
         <Header />
@@ -218,7 +237,13 @@ class JobRoute extends Component {
             {this.renderEmployementList()}
             {this.renderSalaryRange()}
           </JobRouteDetailsContainer>
-          {error === false ? this.renderJobListContainer() : this.renderError()}
+          {isLoading ? (
+            <div>Loading</div>
+          ) : (
+            // <Loader type="TailSpin" color="#00BFFF" height={50} width={50} />
+            //
+            this.renderJobListContainer()
+          )}
         </FilterAndJobListContainer>
       </JobRouteMainContainer>
     );

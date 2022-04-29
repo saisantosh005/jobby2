@@ -144,6 +144,37 @@ const StarIcon = styled(AiFillStar)`
   color: #fbbf24;
   margin-right: 5px;
 `;
+const NoJobDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const SpecialImage = styled.img`
+  width: 90%;
+  padding: 20px;
+`;
+
+const HeadingTwo = styled.h1`
+  text-align: center;
+  color: #ffffff;
+`;
+const Text = styled.p`
+  color: #ffffff;
+  text-align: center;
+`;
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const Button = styled.button`
+  background-color: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 20px;
+`;
 export {
   JobDetailsMainContainer,
   JobItemMainContainer,
@@ -173,5 +204,10 @@ export {
   IconAndTextContainer,
   LocationIcon,
   StarIconContainer,
-  StarIcon
+  StarIcon,
+  ErrorContainer,
+  SpecialImage,
+  HeadingTwo,
+  Text,
+  Button
 };
